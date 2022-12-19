@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="5aa5ccf9-9d50-4bd6-96c1-946c7a88edd9" >
+		<http:listener-connection host="${http.host}" port="${http.port}" />
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="9f47d78c-2ed9-4165-9647-f1e5e45e97a6" file="config/${mule.env}-config.yaml" />
+	<flow name="flowFlow" doc:id="e54c7fa2-6788-4b1d-9284-2f441f0c05c7" >
+		<http:listener doc:name="Listener" doc:id="b60086bd-52ab-4259-b0dd-0cf52843d3b5" config-ref="HTTP_Listener_config" path="/flow"/>
+		<set-payload value='#["this is flow"]' doc:name="Set Payload" doc:id="87a9440d-77ce-4f61-ae4c-cb02b36af6fd" />
+		<logger level="INFO" doc:name="Logger" doc:id="1e95d1c5-3a70-496d-988a-1d55896b1e24" message="#[payload]"/>
+	</flow>
+</mule>
